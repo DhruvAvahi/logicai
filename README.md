@@ -15,7 +15,7 @@ logicai is a user-friendly library that simplifies many Gen-AI tasks using AWS B
 You can install logic just by running:
 
 ```sh
-pip install logicai
+pip install logicsdk
 ```
 
 ### AWS CLI Installation (Optional but Recommended)
@@ -53,7 +53,7 @@ aws_secret_access_key = YOUR_SECRET_KEY
 ### Importing AvahiAI
 
 ```python
-import logicai
+import logicsdk
 ```
 
 ### Summarizing Text Strings
