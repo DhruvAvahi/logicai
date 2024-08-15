@@ -4,11 +4,11 @@ with open("./README.md", "r") as f:
     long_description = f.read()
 
 setup(
-    name="logic-ai",
+    name="logicsdk",
     version="0.0.1",
     description="An avahiai library which makes your Gen-AI tasks effortless",
-    package_dir={"": "logic_ai"},
-    packages=find_packages(where="logic_ai"),
+    package_dir={"": "logicsdk"},
+    packages=find_packages(where="logicsdk"),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/avahi-org/logicai.git",
