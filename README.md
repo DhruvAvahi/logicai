@@ -1,6 +1,6 @@
 # AvahiAI
 
-logicai is a user-friendly library that simplifies many Gen-AI tasks using AWS Bedrock.
+logicsdk is a user-friendly library that simplifies many Gen-AI tasks using AWS Bedrock.
 
 ## current Features
 - Summarize plain text.
@@ -15,7 +15,7 @@ logicai is a user-friendly library that simplifies many Gen-AI tasks using AWS B
 You can install logic just by running:
 
 ```sh
-pip install logicai
+pip install logicsdk
 ```
 
 ### AWS CLI Installation (Optional but Recommended)
@@ -50,16 +50,16 @@ aws_secret_access_key = YOUR_SECRET_KEY
 
 ## Usage
 
-### Importing AvahiAI
+### Importing logicsdk
 
 ```python
-import logicai
+import logicsdk
 ```
 
 ### Summarizing Text Strings
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("This is a test string to summarize.")
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("This is a test string to summarize.")
 print("Summary:", summarization_output)
 print("Input Cost:", input_token_cost)
 print("Output Cost:", output_token_cost)
@@ -73,28 +73,28 @@ print("Cost:", total_cost)
 #### Text File (`.txt`)
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("path/to/your/file.txt")
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.txt")
 print("Summary:", summarization_output)
 ```
 
 #### PDF File (`.pdf`)
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("path/to/your/file.pdf")
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.pdf")
 print("Summary:", summarization_output)
 ```
 
 #### DOCX File (`.docx`)
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("path/to/your/file.docx")
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx")
 print("Summary:", summarization_output)
 ```
 
 ### Summarizing Files from S3
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("s3://your-bucket-name/your-file.pdf", aws_access_key_id="your_access_key", aws_secret_access_key="your_secret_key")
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("s3://your-bucket-name/your-file.pdf", aws_access_key_id="your_access_key", aws_secret_access_key="your_secret_key")
 print("Summary:", summarization_output)
 ```
 
@@ -102,14 +102,14 @@ print("Summary:", summarization_output)
 
 ```python
 custom_prompt = "Please summarize the following document."
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("path/to/your/file.docx", user_prompt=custom_prompt)
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx", user_prompt=custom_prompt)
 print("Summary:", summarization_output)
 ```
 
 ### Changing the Default Model
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = avahiai.summarize("path/to/your/file.docx", model_name="haiku-3.0")
+summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx", model_name="haiku-3.0")
 print("Summary:", summarization_output)
 ```
 ## Other more Gen-ai task to come
