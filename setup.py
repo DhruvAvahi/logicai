@@ -11,7 +11,7 @@ setup(
     packages=find_packages(where="logicai"),
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/avahi-org/avahi-genai-python-package",
+    url="https://github.com/avahi-org/logicai.git",
     author="Avahi AWS",
     author_email="info@avahitech.com",
     license="MIT",
