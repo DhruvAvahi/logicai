@@ -1,6 +1,6 @@
 # AvahiAI
 
-AvahiAI is a user-friendly library that simplifies many Gen-AI tasks using AWS Bedrock.
+logicai is a user-friendly library that simplifies many Gen-AI tasks using AWS Bedrock.
 
 ## current Features
 - Summarize plain text.
@@ -12,10 +12,10 @@ AvahiAI is a user-friendly library that simplifies many Gen-AI tasks using AWS B
 
 ## Installation
 
-You can install avahiai just by running:
+You can install logic just by running:
 
 ```sh
-pip install avahiai
+pip install logicai
 ```
 
 ### AWS CLI Installation (Optional but Recommended)
@@ -53,7 +53,7 @@ aws_secret_access_key = YOUR_SECRET_KEY
 ### Importing AvahiAI
 
 ```python
-import avahiai
+import logicai
 ```
 
 ### Summarizing Text Strings
