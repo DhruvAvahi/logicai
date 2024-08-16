@@ -1,5 +1,5 @@
-from summarizer import BedrockSummarizer
-from structredExtraction import BedrockstructredExtraction
+from .summarizer import BedrockSummarizer
+from .structredExtraction import BedrockstructredExtraction
 import os
 from loguru import logger
 
