@@ -8,7 +8,6 @@ import docx
 from io import BytesIO
 import botocore.exceptions
 
-
 class BedrockSummarizer:
     def __init__(self, region_name='us-east-1', default_model_name='sonnet-3.5', aws_access_key_id=None,
                  aws_secret_access_key=None):
@@ -27,17 +26,16 @@ class BedrockSummarizer:
                     aws_secret_access_key=self.aws_secret_access_key,
                     region_name=self.region_name
                 )
-                logger.info("Successfully created AWS session with provided credentials.")
                 return session.client(service_name="bedrock-runtime")
             else:
-                # Checking if AWS credentials are set
-                logger.info("Using default AWS credentials.")
-                boto3.Session().get_credentials().get_frozen_credentials()
-                logger.info("Successfully retrieved default AWS credentials.")
+                logger.info("No explicit credentials provided. Attempting to use default credentials.")
                 return boto3.client(service_name="bedrock-runtime", region_name=self.region_name)
+        except botocore.exceptions.NoCredentialsError:
+            logger.error("No AWS credentials found. Please provide credentials or configure your environment.")
+            raise ValueError("AWS credentials are required. Please provide aws_access_key_id and aws_secret_access_key or configure your environment with AWS credentials.")
         except Exception as e:
-            logger.error("AWS credentials are not set or invalid. Please configure your AWS credentials.")
-            raise Exception("AWS credentials are not set or invalid. Please configure your AWS credentials.") from e
+            logger.error(f"Error setting up Bedrock client: {str(e)}")
+            raise
 
     def model_invoke(self, prompt, model_name=None, max_retries=15, initial_delay=2):
         if model_name is None:
