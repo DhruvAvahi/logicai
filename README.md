@@ -6,6 +6,9 @@ logicsdk is a user-friendly library that simplifies many Gen-AI tasks using AWS 
 - Summarize plain text.
 - Summarize text from local files (`.txt`, `.pdf`, `.docx`).
 - Summarize text from S3 files (`.txt`, `.pdf`, `.docx`).
+- Extract the entities from plain text.
+- Extract the entities from from local files (`.txt`, `.pdf`, `.docx`).
+- Extract the entities from from S3 files (`.txt`, `.pdf`, `.docx`).
 - Support for custom prompts and different anthropic claude model versions.
 - Error handling with user-friendly messages.
 - And many more to come...
@@ -59,8 +62,8 @@ import logicsdk
 ### Summarizing Text Strings
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("This is a test string to summarize.")
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("This is a test string to summarize.")
+print("Summary:", extraction_output)
 print("Input Cost:", input_token_cost)
 print("Output Cost:", output_token_cost)
 print("Cost:", total_cost)
@@ -73,45 +76,106 @@ print("Cost:", total_cost)
 #### Text File (`.txt`)
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.txt")
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.txt")
+print("Summary:", extraction_output)
 ```
 
 #### PDF File (`.pdf`)
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.pdf")
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.pdf")
+print("Summary:", extraction_output)
 ```
 
 #### DOCX File (`.docx`)
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx")
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx")
+print("Summary:", extraction_output)
 ```
 
 ### Summarizing Files from S3
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("s3://your-bucket-name/your-file.pdf", aws_access_key_id="your_access_key", aws_secret_access_key="your_secret_key")
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("s3://your-bucket-name/your-file.pdf", aws_access_key_id="your_access_key", aws_secret_access_key="your_secret_key")
+print("Summary:", extraction_output)
 ```
 
 ### Using a Custom Prompt
 
 ```python
 custom_prompt = "Please summarize the following document."
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx", user_prompt=custom_prompt)
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx", user_prompt=custom_prompt)
+print("Summary:", extraction_output)
 ```
 
 ### Changing the Default Model
 
 ```python
-summarization_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx", model_name="haiku-3.0")
-print("Summary:", summarization_output)
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.summarize("path/to/your/file.docx", model_name="haiku-3.0")
+print("Summary:", extraction_output)
 ```
+
+
+## Extraction
+
+### Extracting from Strings
+
+```python
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("This is a test string to for the extraction.")
+print("Extraction:", extraction_output)
+print("Input Cost:", input_token_cost)
+print("Output Cost:", output_token_cost)
+print("Cost:", total_cost)
+```
+
+
+### Extracting from Local Files
+
+#### Text File (`.txt`)
+
+```python
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("path/to/your/file.txt")
+print("Extraction:", extraction_output)
+```
+
+#### PDF File (`.pdf`)
+
+```python
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("path/to/your/file.pdf")
+print("Summary:", extraction_output)
+```
+
+#### DOCX File (`.docx`)
+
+```python
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("path/to/your/file.docx")
+print("Summary:", extraction_output)
+```
+
+### Extracting from Files in S3
+
+```python
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("s3://your-bucket-name/your-file.pdf", aws_access_key_id="your_access_key", aws_secret_access_key="your_secret_key")
+print("Summary:", extraction_output)
+```
+
+### Using a Custom Prompt
+
+```python
+custom_prompt = "Please summarize the following document."
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("path/to/your/file.docx", user_prompt=custom_prompt)
+print("Summary:", extraction_output)
+```
+
+### Changing the Default Model
+
+```python
+extraction_output, input_token_cost, output_token_cost, total_cost = logicsdk.structredExtraction("path/to/your/file.docx", model_name="haiku-3.0")
+print("Summary:", extraction_output)
+```
+
+
 ## Other more Gen-ai task to come
 
 ## Error Handling
