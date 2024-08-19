@@ -8,7 +8,7 @@ import docx
 from io import BytesIO
 import botocore.exceptions
 
-class BedrockstructredExtraction:
+class BedrockDataMasking:
     def __init__(self, region_name='us-west-2', default_model_name='sonnet-3', aws_access_key_id=None,
                  aws_secret_access_key=None):
         self.region_name = region_name
@@ -112,31 +112,35 @@ class BedrockstructredExtraction:
         logger.info(f"Using model: {model_id}")
         return model_id, input_cost, output_cost
 
-    def extract_text(self, text, user_prompt=None, model_name=None):
+    def mask_text(self, text, user_prompt=None, model_name=None):
         if not text:
             logger.error("Input text cannot be empty.")
             raise ValueError("Input text cannot be empty.")
 
-        prompt = user_prompt if user_prompt else f"""extract the below entities from this model in structured format:
-1. Name:
-2. Places:
+        prompt = user_prompt if user_prompt else f"""Selectively mask specific types of sensitive data in the following text by replacing only the characters of the sensitive information with '*'. Leave all other text unchanged.
 
+Sensitive data types to mask:
+1. Names (first and last)
+2. Email addresses
+3. Social Security Numbers (9-digit numbers)
+4. Phone numbers (various formats)
 
-Text: {text}
+Text to process:
+{text}
 
-response should be json in below format
+Instructions:
+1. Identify instances of the above sensitive data types in the text.
+2. Replace each character of ONLY the identified sensitive data with '*'.
+3. Leave all other text completely unchanged.
+4. Return the entire text with only the sensitive data masked.
+5. Do not add any explanations or additional text to your response.
 
-""" + """response should be json in below format
+Example:
+Input: "John Doe's email is john@example.com and SSN is 123-45-6789."
+Output: "**** ***'s email is ***************** and SSN is ***********."
 
-{
-  "Name": ["Name1", "Name2"]
-  "Places": [
-    "Place1",
-    "Place2"
-  ] 
-}
-
-Make sure output has only json output. No other extra words"""
+Processed text:
+"""
         return self.model_invoke(prompt, model_name)
 
     def _read_pdf(self, file_obj):
@@ -160,7 +164,7 @@ Make sure output has only json output. No other extra words"""
         doc = docx.Document(file_obj)
         return "\n".join([paragraph.text for paragraph in doc.paragraphs])
 
-    def extract_file(self, file_path, user_prompt=None, model_name=None):
+    def mask_file(self, file_path, user_prompt=None, model_name=None):
         if not os.path.exists(file_path):
             logger.error(f"The file at {file_path} does not exist. Please check the file path.")
             raise ValueError(f"The file at {file_path} does not exist. Please check the file path.")
@@ -175,9 +179,9 @@ Make sure output has only json output. No other extra words"""
             with open(file_path, 'r', encoding="utf-8") as file:  # Explicitly setting encoding
                 text = file.read()
 
-        return self.extract_text(text, user_prompt, model_name)
+        return self.mask_text(text, user_prompt, model_name)
 
-    def extract_s3_file(self, s3_file_path, user_prompt=None, model_name=None):
+    def mask_s3_file(self, s3_file_path, user_prompt=None, model_name=None):
         s3 = boto3.client('s3')
         bucket_name, key_name = self._parse_s3_path(s3_file_path)
         try:
@@ -204,7 +208,7 @@ Make sure output has only json output. No other extra words"""
             logger.error(user_friendly_error)
             raise ValueError(user_friendly_error)
 
-        return self.extract_text(text, user_prompt, model_name)
+        return self.mask_text(text, user_prompt, model_name)
 
     def _parse_s3_path(self, s3_file_path):
         if not s3_file_path.startswith('s3://'):

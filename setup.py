@@ -5,7 +5,7 @@ with open("./README.md", "r") as f:
 
 setup(
     name="logicsdk",
-    version="0.0.5",
+    version="0.0.7",
     description="An avahiai library which makes your Gen-AI tasks effortless",
     # package_dir={"": "logicsdk"},
     packages=find_packages(),

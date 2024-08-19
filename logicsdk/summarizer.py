@@ -3,13 +3,13 @@ import time
 import json
 import os
 from loguru import logger
-import pymupdf  # PyMuPDF
+import pymupdf  
 import docx
 from io import BytesIO
 import botocore.exceptions
 
 class BedrockSummarizer:
-    def __init__(self, region_name='us-east-1', default_model_name='sonnet-3.5', aws_access_key_id=None,
+    def __init__(self, region_name='us-west-2', default_model_name='sonnet-3', aws_access_key_id=None,
                  aws_secret_access_key=None):
         self.region_name = region_name
         self.default_model_name = default_model_name
